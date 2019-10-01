@@ -58,11 +58,11 @@ EOF
 		;;
 		"")
 		echo -e "Asiginacion \e[44mautomatica\e[0m de la red /24"
-		for host in {1..254};do ping -a -i 0.2 -c 1  $redeC$host | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' ;done
+		for host in {1..254};do ping -a -i 0.2 -c 1  $redeC$host | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' && > dome.txt;done 
 		;;
 		24)
 		echo -e "Escaneo de la red \e[44m$redeC\e[0m0 con la mascara $mask" 
-		for host in {1..254};do ping -a -i 0.2 -c 1  $redeC$host | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' ;done
+		for host in {1..254};do ping -a -i 0.2 -c 1  $redeC$host | sed -n 2p | awk -F' ' '{if($1=="64") print "'$redeC$host' \033[0;32mActivo\033[0m";else print "'$redeC$host' \033[0;31mInativo\033[0m"}';done
 		;;
 		*)
 		echo "Nao e uma rede valida"
