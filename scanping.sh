@@ -50,15 +50,15 @@ EOF
 	case $mask in
 		8)
 		echo -e "Escaneo de la red \e[44m$redeA\e[0m0.0.0 con la mascara $mask" 
-		for host0 in {0..255};do for host1 in {0..255};do for host3 in {1..254};do ping -a -i 0.2 -c 1 "192.168.$host0.$host1" | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' ;done;done;done
+		for host0 in {0..255};do for host1 in {0..255};do for host2 in {1..254};do ping -a -i 0.2 -c 1 "192.$host0.$host1.$host2" | sed -n 2p | awk -F' ' '{if($1=="64") print "'$redeA$host0'.'$host1'.'host2' \033[0;32mActivo\033[0m";else print "'$redeA$host0'.'$host1'.'$host2' \033[0;31mInativo\033[0m"}' ;done;done;done
 		;;
 		16)
 		echo -e "Escaneo de la red \e[44m$redeB\e[0m0.0 con la mascara $mask"
-		for host0 in {0..255};do for host1 in {1..254};do ping -a -i 0.2 -c 1 "192.168.$host0.$host1" | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' ;done;done
+		for host0 in {0..255};do for host1 in {1..254};do ping -a -i 0.2 -c 1 "192.168.$host0.$host1" | sed -n 2p | awk -F' ' '{if($1=="64") print "'$redeB$host0'.'$host1' \033[0;32mActivo\033[0m";else print "'$redeB$host0'.'$host1' \033[0;31mInativo\033[0m"}';done;done
 		;;
 		"")
 		echo -e "Asiginacion \e[44mautomatica\e[0m de la red /24"
-		for host in {1..254};do ping -a -i 0.2 -c 1  $redeC$host | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' && > dome.txt;done 
+		for host in {1..254};do ping -a -i 0.2 -c 1  $redeC$host | sed -n 2p | awk -F' ' '{if($1=="64") print "'$redeC$host' \033[0;32mActivo\033[0m";else print "'$redeC$host' \033[0;31mInativo\033[0m"}';done
 		;;
 		24)
 		echo -e "Escaneo de la red \e[44m$redeC\e[0m0 con la mascara $mask" 
