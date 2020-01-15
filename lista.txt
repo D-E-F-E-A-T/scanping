@@ -1,0 +1,13 @@
+firewall
+monitoriamento
+intranet
+ns1
+ns01
+mail
+webmail
+rh
+sistema
+homologacao
+admin
+logs
+api
