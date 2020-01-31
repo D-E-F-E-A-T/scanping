@@ -1,0 +1,4 @@
+# Nmap 7.80 scan initiated Sat Jan 25 13:19:49 2020 as: nmap -sS -O -Pn -p 3389 --open -iL ctfhosts.txt -oG rdp.txt
+Host: 172.30.0.103 ()	Status: Up
+Host: 172.30.0.103 ()	Ports: 3389/open/tcp//ms-wbt-server///	Seq Index: 253	IP ID Seq: Incremental
+# Nmap done at Sat Jan 25 13:20:02 2020 -- 21 IP addresses (21 hosts up) scanned in 13.41 seconds
